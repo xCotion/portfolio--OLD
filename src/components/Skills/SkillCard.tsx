@@ -12,17 +12,19 @@ export const SkillCard = ({ title, description, icon: Icon, index }: SkillCardPr
   return (
     <motion.div
       className="glass-card skill-card"
-      whileHover={{ 
-        scale: 1.02,
-        backgroundColor: 'rgba(255, 255, 255, 0.04)'
-      }}
+      whileHover={{ scale: 1.02 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
         delay: index * 0.2,
         duration: 0.5,
         type: "spring",
-        stiffness: 100
+        stiffness: 100,
+        hover: {
+          type: "tween",
+          duration: 0.2,
+          ease: "easeOut"
+        }
       }}
     >
       <motion.div
