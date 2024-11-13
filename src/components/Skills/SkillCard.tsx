@@ -12,33 +12,45 @@ export const SkillCard = ({ title, description, icon: Icon, index }: SkillCardPr
   return (
     <motion.div
       className="glass-card skill-card"
-      whileHover={{ scale: 1.02 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ 
+        opacity: 0, 
+        y: 20,
+        filter: 'drop-shadow(0 0 0 transparent)'
+      }}
+      animate={{ 
+        opacity: 1, 
+        y: 0,
+        filter: 'drop-shadow(0 0 0 transparent)'
+      }}
+      whileHover={{ 
+        scale: 1.02,
+        filter: 'drop-shadow(0 0 12px var(--accent-glow))',
+        y: -5
+      }}
       transition={{ 
-        delay: index * 0.2,
-        duration: 0.5,
-        type: "spring",
-        stiffness: 100,
-        hover: {
-          type: "tween",
-          duration: 0.2,
-          ease: "easeOut"
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          delay: index * 0.2,
+          duration: 0.5
+        },
+        scale: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
+        },
+        filter: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
+        },
+        y: {
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1]
         }
       }}
     >
-      <motion.div
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 3,
-          ease: "easeInOut"
-        }}
-      >
+      <div className="skill-icon-wrapper">
         <Icon />
-      </motion.div>
+      </div>
       <h3 className="heading-secondary">{title}</h3>
       <p className="body-text">{description}</p>
     </motion.div>

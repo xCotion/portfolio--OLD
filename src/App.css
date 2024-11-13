@@ -114,34 +114,29 @@
 }
 
 .skill-card {
-  flex: 1;
-  min-width: 280px;
-  max-width: 320px;
-  height: 280px;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
   text-align: center;
-  background: rgba(24, 24, 27, 0.8);
-  border: 1px solid rgba(63, 63, 70, 0.4);
+  width: 300px;
+  background: var(--glass-weak);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-large);
   backdrop-filter: blur(12px);
-  border-radius: 20px;
-  transition: background-color 0.2s ease;
-}
-
-.skill-card:hover {
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .skill-icon {
   width: 48px;
   height: 48px;
-  margin-bottom: 1.5rem;
-  color: var(--accent-primary);
-  opacity: 0.9;
-  filter: drop-shadow(0 0 8px var(--accent-glow));
+  color: var(--accent-light);
+}
+
+.skill-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Achievements Section */
