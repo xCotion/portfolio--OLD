@@ -1,0 +1,47 @@
+:root {
+  /* Colors */
+  --bg-primary: #09090B;    /* zinc-950 */
+  --bg-secondary: #18181B;  /* zinc-900 */
+  --text-primary: #F4F4F5;  /* zinc-100 */
+  --text-secondary: #E4E4E7;/* zinc-200 */
+  --text-tertiary: #D4D4D8; /* zinc-300 */
+  --text-body: #A1A1AA;     /* zinc-400 */
+  --text-subtle: #71717A;   /* zinc-500 */
+  
+  /* Glass Effects */
+  --glass-subtle: rgba(255, 255, 255, 0.03);
+  --glass-light: rgba(255, 255, 255, 0.04);
+  --glass-medium: rgba(255, 255, 255, 0.06);
+  --glass-strong: rgba(255, 255, 255, 0.08);
+  
+  /* Accent Colors */
+  --accent-light: #94A3B8;   /* Slate 400 */
+  --accent-primary: #64748B; /* Slate 500 */
+  --accent-dark: #475569;    /* Slate 600 */
+  --accent-glow: rgba(148, 163, 184, 0.15);
+
+  /* Font */
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, var(--bg-secondary), var(--bg-primary));
+  color: var(--text-primary);
+}

@@ -1,0 +1,273 @@
+.app-container {
+  min-height: 100vh;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 4rem;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--text-primary), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* Skills Section */
+.skills-section {
+  padding: 6rem 0;
+  width: 100%;
+}
+
+.skills-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 0 1rem;
+}
+
+/* Brands Section */
+.brands-section {
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.brands-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+}
+
+.brands-container h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+.brands-grid {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.brand-item {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  padding: 1.5rem 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.brand-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Glass Panel */
+.glass-panel {
+  background: var(--glass-subtle);
+  border: 1px solid var(--glass-medium);
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.skill-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+  height: 280px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--glass-light);
+  border: 1px solid var(--glass-medium);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+/* Achievements Section */
+.achievements-section {
+  padding: 6rem 0;
+}
+
+.achievement-card {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--glass-subtle);
+  border-radius: 12px;
+  border: 1px solid var(--glass-medium);
+}
+
+.achievement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.achievement-metric {
+  background: var(--glass-medium);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--accent-light);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.cta-card {
+  padding: 4rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-button {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: var(--glass-medium);
+  border: 1px solid var(--glass-strong);
+  border-radius: 25px;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--glass-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Typography */
+.heading-primary {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.heading-secondary {
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.body-text {
+  color: var(--text-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Animations */
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px var(--accent-glow));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px var(--accent-glow));
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .skills-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skill-card {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .brands-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .brand-item {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 1rem;
+  }
+
+  .hero-content {
+    padding: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .heading-primary {
+    font-size: 2rem;
+  }
+}
