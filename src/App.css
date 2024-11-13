@@ -1,4 +1,6 @@
 .app-container {
+  padding-top: 80px;
+  padding-bottom: 80px;
   min-height: 100vh;
   color: var(--text-primary);
   overflow-x: hidden;
@@ -324,4 +326,110 @@
 .brand-logo[alt="KPS Jewellery"],
 .brand-logo[alt="KPS Jewellery"] + .brand-name {
   transform: translateY(-10px);
+}
+
+.glass-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-medium);
+  padding: 1.25rem 2rem;
+}
+
+.header-nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  background: linear-gradient(
+    to right,
+    var(--text-primary),
+    var(--accent-light)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.glass-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--glass-medium);
+  padding: 1.25rem 2rem;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-section {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.footer-section a {
+  color: var(--text-subtle);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.footer-text {
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .glass-header,
+  .glass-footer {
+    padding: 1rem;
+  }
+  
+  .nav-links {
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+  }
 }
