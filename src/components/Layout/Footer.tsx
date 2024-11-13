@@ -4,9 +4,16 @@ import { motion } from 'framer-motion';
 export const Footer = () => {
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className="glass-footer"
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10
+      }}
     >
       <div className="footer-content">
         <div className="footer-section">

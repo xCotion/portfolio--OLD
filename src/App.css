@@ -56,7 +56,7 @@
 .brands-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 3rem 2rem;
   min-height: 300px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -75,15 +75,15 @@
 .brands-grid {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 4rem;
+  margin-top: 3rem;
 }
 
 .brand-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   width: 200px;
   height: 150px;
   justify-content: center;
@@ -97,8 +97,10 @@
 }
 
 .brand-name {
-  font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 /* Glass Panel */
@@ -114,17 +116,15 @@
 }
 
 .skill-card {
+  background: var(--glass-subtle);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-medium);
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding: 2rem;
-  text-align: center;
-  width: 300px;
-  background: var(--glass-weak);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-large);
-  backdrop-filter: blur(12px);
+  width: 320px;
 }
 
 .skill-icon {
@@ -204,17 +204,15 @@
   font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 2rem;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .heading-secondary {
   color: var(--text-secondary);
-  font-size: 1.25rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  opacity: 0.9;
-  line-height: 1.6;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .body-text {
@@ -309,15 +307,16 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-medium);
-  padding: 1.25rem 2rem;
+  z-index: 100;
+  padding: 1rem 2rem;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .header-nav {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -341,16 +340,24 @@
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .nav-links a {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
-  font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.8;
   transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .glass-footer {
