@@ -1,9 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-// Temporary placeholder images
-const kpsLogo = "https://via.placeholder.com/150?text=KPS";
-const donsLogo = "https://via.placeholder.com/150?text=Dons";
+// Use dynamic import for images
+const kpsLogo = new URL('../../assets/KPSLOGO.PNG', import.meta.url).href;
+const donsLogo = new URL('../../assets/dons.png', import.meta.url).href;
 
 export const Brands = () => {
   const brands = [
