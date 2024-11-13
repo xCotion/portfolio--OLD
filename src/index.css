@@ -1,24 +1,24 @@
 :root {
   /* Colors */
-  --bg-primary: #09090B;    /* zinc-950 */
-  --bg-secondary: #18181B;  /* zinc-900 */
-  --text-primary: #F4F4F5;  /* zinc-100 */
-  --text-secondary: #E4E4E7;/* zinc-200 */
-  --text-tertiary: #D4D4D8; /* zinc-300 */
-  --text-body: #A1A1AA;     /* zinc-400 */
-  --text-subtle: #71717A;   /* zinc-500 */
+  --bg-primary: #000000;    /* Darker background */
+  --bg-secondary: #0A0A0A;  /* Slightly lighter black */
+  --text-primary: #F4F4F5;  
+  --text-secondary: #E4E4E7;
+  --text-tertiary: #D4D4D8; 
+  --text-body: #A1A1AA;     
+  --text-subtle: #71717A;   
   
-  /* Glass Effects */
-  --glass-subtle: rgba(255, 255, 255, 0.03);
-  --glass-light: rgba(255, 255, 255, 0.04);
-  --glass-medium: rgba(255, 255, 255, 0.06);
-  --glass-strong: rgba(255, 255, 255, 0.08);
+  /* Glass Effects - Darker and more subtle */
+  --glass-subtle: rgba(255, 255, 255, 0.02);
+  --glass-light: rgba(255, 255, 255, 0.03);
+  --glass-medium: rgba(255, 255, 255, 0.04);
+  --glass-strong: rgba(255, 255, 255, 0.05);
   
-  /* Accent Colors */
-  --accent-light: #94A3B8;   /* Slate 400 */
-  --accent-primary: #64748B; /* Slate 500 */
-  --accent-dark: #475569;    /* Slate 600 */
-  --accent-glow: rgba(148, 163, 184, 0.15);
+  /* Accent Colors - More muted */
+  --accent-light: #94A3B8;   
+  --accent-primary: #64748B; 
+  --accent-dark: #475569;    
+  --accent-glow: rgba(148, 163, 184, 0.08);
 
   /* Font */
   font-family: Inter, system-ui, -apple-system, sans-serif;
@@ -42,6 +42,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: radial-gradient(circle at top, var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   color: var(--text-primary);
 }

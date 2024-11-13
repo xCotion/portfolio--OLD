@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Temporary placeholder images
+const kpsLogo = "https://via.placeholder.com/150?text=KPS";
+const donsLogo = "https://via.placeholder.com/150?text=Dons";
+
 export const Brands = () => {
   const brands = [
-    { name: 'KPS Jewellery', delay: 0 },
-    { name: 'Dons Meals', delay: 0.2 }
+    { name: 'KPS Jewellery', logo: kpsLogo, delay: 0 },
+    { name: 'Dons Meals', logo: donsLogo, delay: 0.2 }
   ];
 
   return (
@@ -33,7 +37,8 @@ export const Brands = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.04)'
               }}
             >
-              {brand.name}
+              <img src={brand.logo} alt={brand.name} className="brand-logo" />
+              <span className="brand-name">{brand.name}</span>
             </motion.div>
           ))}
         </div>
