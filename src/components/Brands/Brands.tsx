@@ -11,14 +11,14 @@ export const Brands = () => {
       logo: kpsLogo, 
       delay: 0, 
       color: '#D4AF37',
-      baseSize: '156px'  // 120px * 1.3
+      baseSize: '156px'
     },
     { 
       name: 'Dons Meals', 
       logo: donsLogo, 
       delay: 0.2, 
       color: '#FFFFFF',
-      baseSize: '84px'   // 120px * 0.7
+      baseSize: '84px'
     }
   ];
 
@@ -48,15 +48,26 @@ export const Brands = () => {
                 src={brand.logo} 
                 alt={brand.name} 
                 className="brand-logo"
-                style={{ width: brand.baseSize }}
+                style={{ 
+                  width: brand.baseSize,
+                  filter: 'drop-shadow(0 0 0 transparent)'
+                }}
+                initial={{ filter: 'drop-shadow(0 0 0 transparent)' }}
                 whileHover={{ 
                   scale: 1.05,
                   filter: `drop-shadow(0 0 8px ${brand.color})`
                 }}
                 transition={{
-                  type: "tween",
                   duration: 0.3,
-                  ease: [0.4, 0, 0.2, 1] // Custom easing for smoother transition
+                  ease: [0.4, 0, 0.2, 1],
+                  scale: {
+                    duration: 0.3,
+                    ease: [0.4, 0, 0.2, 1]
+                  },
+                  filter: {
+                    duration: 0.3,
+                    ease: [0.4, 0, 0.2, 1]
+                  }
                 }}
               />
               <span className="brand-name">{brand.name}</span>

@@ -92,11 +92,8 @@
 }
 
 .brand-logo {
-  width: 120px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 0 transparent);
-  transition: filter 0.2s ease-out;
 }
 
 .brand-name {
