@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 interface SkillCardProps {
@@ -11,6 +11,18 @@ interface SkillCardProps {
 
 export const SkillCard = ({ title, description, details, icon: Icon, index }: SkillCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    cardRef.current.style.setProperty('--mouse-x', `${x}px`);
+    cardRef.current.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   return (
     <motion.div
@@ -23,35 +35,43 @@ export const SkillCard = ({ title, description, details, icon: Icon, index }: Sk
       }}
     >
       <motion.div 
+        ref={cardRef}
         className="skill-card"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
         onClick={() => setIsFlipped(!isFlipped)}
-        style={{
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-        }}
+        onMouseMove={handleMouseMove}
       >
         <motion.div 
           className="skill-card-front"
           animate={{ opacity: isFlipped ? 0 : 1 }}
           transition={{ duration: 0.3 }}
+          style={{ WebkitBackfaceVisibility: 'hidden' }}
         >
           <div className="skill-icon-wrapper">
             <Icon />
           </div>
-          <h3 className="skill-title">{title}</h3>
-          <p className="skill-description">{description}</p>
-          <span className="flip-hint">Click to learn more</span>
+          <div className="skill-content">
+            <h3 className="skill-title">{title}</h3>
+            <p className="skill-description">{description}</p>
+          </div>
+          <p className="flip-hint">Learn More →</p>
         </motion.div>
 
         <motion.div 
           className="skill-card-back"
           animate={{ opacity: isFlipped ? 1 : 0 }}
           transition={{ duration: 0.3 }}
+          style={{ WebkitBackfaceVisibility: 'hidden' }}
         >
-          <h3 className="skill-title">{title}</h3>
-          <p className="skill-details">{details}</p>
-          <span className="flip-hint">Click to flip back</span>
+          <div className="skill-icon-wrapper">
+            <Icon />
+          </div>
+          <div className="skill-content">
+            <h3 className="skill-title">{title}</h3>
+            <p className="skill-details">{details}</p>
+          </div>
+          <p className="flip-hint">← Back</p>
         </motion.div>
       </motion.div>
     </motion.div>

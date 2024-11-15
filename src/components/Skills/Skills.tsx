@@ -30,10 +30,10 @@ const skillsData = [
   // Page 2
   [
     {
-      title: 'Database Design',
-      description: 'Optimized data structures and schemas',
-      details: 'Creating efficient database architectures and optimization strategies.',
-      icon: ArchitectureIcon,
+      title: 'Photography & Video',
+      description: 'Professional product visuals',
+      details: 'Specialized in product photography, social media content, and video production.',
+      icon: PhoneIcon,
     },
     {
       title: 'Cloud Solutions',
@@ -42,10 +42,10 @@ const skillsData = [
       icon: AIIcon,
     },
     {
-      title: 'Web Development',
-      description: 'Modern web applications',
-      details: 'Building responsive and performant web applications.',
-      icon: PhoneIcon,
+      title: 'Architecture Design',
+      description: 'Scalable systems and optimized databases',
+      details: 'Creating efficient database architectures and optimization strategies.',
+      icon: ArchitectureIcon,
     },
   ],
 ];
@@ -95,7 +95,7 @@ export const Skills = () => {
 
   return (
     <section className="skills-section" {...handlers}>
-      <div className="glass-panel">
+      <div className="skills-container">
         <h2 className="heading-primary">Core Specialties</h2>
         
         <div className="carousel-container">

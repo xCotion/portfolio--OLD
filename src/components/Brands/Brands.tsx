@@ -1,23 +1,37 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './Brands.css';
 
 const kpsLogo = new URL('../../assets/KPSLOGO.PNG', import.meta.url).href;
 const donsLogo = new URL('../../assets/dons.png', import.meta.url).href;
 
 export const Brands = () => {
+  const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
+
+  const getGlowStyle = (brand: string) => {
+    if (brand === 'KPS Jewellery') {
+      return {
+        color: 'rgba(212, 175, 55, 0.5)',  // Gold
+        glow: 'rgba(212, 175, 55, 0.3)'    // Softer gold
+      };
+    }
+    return {
+      color: 'rgba(255, 255, 255, 0.5)',   // White
+      glow: 'rgba(255, 255, 255, 0.3)'     // Soft white
+    };
+  };
+
   const brands = [
     { 
       name: 'KPS Jewellery', 
       logo: kpsLogo, 
-      delay: 0, 
-      color: '#D4AF37',
+      delay: 0,
       baseSize: '156px'
     },
     { 
       name: 'Dons Meals', 
       logo: donsLogo, 
-      delay: 0.2, 
-      color: '#FFFFFF',
+      delay: 0.2,
       baseSize: '84px'
     }
   ];
@@ -25,54 +39,57 @@ export const Brands = () => {
   return (
     <section className="brands-section">
       <motion.div 
-        className="glass-panel brands-container"
+        className="brands-container"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
         <h2 className="heading-primary">Brands Worked With</h2>
         <div className="brands-grid">
-          {brands.map((brand, index) => (
-            <motion.div
-              key={index}
-              className="brand-item"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                delay: brand.delay,
-                duration: 0.5,
-                ease: "easeOut"
-              }}
-            >
-              <motion.img 
-                src={brand.logo} 
-                alt={brand.name} 
-                className="brand-logo"
-                style={{ 
-                  width: brand.baseSize,
-                  filter: 'drop-shadow(0 0 0 transparent)'
-                }}
-                initial={{ filter: 'drop-shadow(0 0 0 transparent)' }}
-                whileHover={{ 
-                  scale: 1.05,
-                  filter: `drop-shadow(0 0 8px ${brand.color})`
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: [0.4, 0, 0.2, 1],
-                  scale: {
-                    duration: 0.3,
-                    ease: [0.4, 0, 0.2, 1]
-                  },
-                  filter: {
-                    duration: 0.3,
-                    ease: [0.4, 0, 0.2, 1]
-                  }
-                }}
-              />
-              <span className="brand-name">{brand.name}</span>
-            </motion.div>
-          ))}
+          <AnimatePresence mode="wait">
+            {brands.map((brand) => {
+              const glowStyle = getGlowStyle(brand.name);
+              return (
+                <motion.div
+                  key={brand.name}
+                  className="brand-item"
+                  onMouseEnter={() => setHoveredBrand(brand.name)}
+                  onMouseLeave={() => setHoveredBrand(null)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: brand.delay,
+                    duration: 0.5,
+                    ease: "easeOut"
+                  }}
+                >
+                  <motion.div
+                    className="brand-logo-container"
+                    animate={{
+                      scale: hoveredBrand === brand.name ? 1.05 : 1,
+                      filter: hoveredBrand === brand.name 
+                        ? `drop-shadow(0 0 5px ${glowStyle.color}) drop-shadow(0 0 15px ${glowStyle.glow}) drop-shadow(0 0 25px ${glowStyle.glow})`
+                        : 'drop-shadow(0 0 0 transparent)',
+                    }}
+                    transition={{
+                      type: "tween",
+                      duration: 0.2,
+                      ease: "easeOut"
+                    }}
+                  >
+                    <motion.img 
+                      src={brand.logo} 
+                      alt={brand.name} 
+                      className="brand-logo"
+                      style={{ width: brand.baseSize }}
+                      layoutId={`brand-${brand.name}`}
+                    />
+                  </motion.div>
+                  <span className="brand-name">{brand.name}</span>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </motion.div>
     </section>

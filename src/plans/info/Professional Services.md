@@ -49,6 +49,10 @@
     - Schema development
     - System architecture
     - Database optimization
+- Photography & Videography
+    - Product photography
+    - Social media content
+    - Video production
 
 ---
 
