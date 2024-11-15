@@ -21,7 +21,7 @@ export const Footer = () => {
             className="footer-text"
             whileHover={{ color: 'var(--accent-light)' }}
           >
-            © 2024 Ashton.io
+            2024 Ashton.services
           </motion.p>
         </div>
         <div className="footer-section">
