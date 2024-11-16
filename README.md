@@ -65,5 +65,3 @@ Built with a custom glass-based design system featuring:
 ## 📄 License
 
 Copyright 2024 ashton.services. All rights reserved.
-
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/xCotion/portfolio)
