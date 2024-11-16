@@ -10,19 +10,19 @@ const skillsData = [
   [
     {
       title: 'iOS Development',
-      description: 'Native applications and custom frameworks',
+      description: 'Native Apps & Custom Frameworks',
       details: 'Specialized in native iOS development, custom Xcode frameworks, and App Store deployment.',
       icon: PhoneIcon,
     },
     {
       title: 'AI Integration',
-      description: 'Machine learning and smart automation',
+      description: 'Machine Learning & Automation',
       details: 'Expert implementation of AI-powered features and smart automation solutions.',
       icon: AIIcon,
     },
     {
-      title: 'Architecture Design',
-      description: 'Scalable systems and optimized databases',
+      title: 'Backend Architecture',
+      description: 'Scalable Systems & Infrastructure',
       details: 'Focus on schema design, database architecture, and system scalability planning.',
       icon: ArchitectureIcon,
     },
@@ -30,21 +30,21 @@ const skillsData = [
   // Page 2
   [
     {
-      title: 'Photography & Video',
-      description: 'Professional product visuals',
-      details: 'Specialized in product photography, social media content, and video production.',
+      title: 'Product Photography',
+      description: 'Professional Media Production',
+      details: 'Specialized in product photography, videography, and professional media content.',
       icon: PhoneIcon,
     },
     {
-      title: 'Cloud Solutions',
-      description: 'Scalable cloud infrastructure',
-      details: 'Implementation of robust cloud-based solutions and services.',
+      title: 'Social Media Growth',
+      description: 'Strategy & Management',
+      details: 'Strategic social media management focused on organic growth and engagement.',
       icon: AIIcon,
     },
     {
-      title: 'Architecture Design',
-      description: 'Scalable systems and optimized databases',
-      details: 'Creating efficient database architectures and optimization strategies.',
+      title: 'Digital Content',
+      description: 'Creation & Distribution',
+      details: 'Creating and distributing engaging digital content across multiple platforms.',
       icon: ArchitectureIcon,
     },
   ],

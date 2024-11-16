@@ -33,16 +33,7 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          iOS Development • AI Integration • Technical Architecture
-        </motion.p>
-
-        <motion.p 
-          className="hero-tagline"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          Transforming ideas into elegant, scalable solutions that drive innovation and deliver exceptional user experiences.
+          iOS Development • Creative Media • AI Integration
         </motion.p>
 
         <motion.div 
