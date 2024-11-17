@@ -7,47 +7,59 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
-  prefix: "",
+    './src/**/*.{js,jsx}',
+  ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        'bg-primary': '#0a0a0a',
-        'bg-secondary': '#111111',
-        'text-primary': '#ffffff',
-        'text-secondary': '#a0a0a0',
-        'text-tertiary': '#666666',
-        'text-body': '#e0e0e0',
-        'text-subtle': '#4a4a4a',
-        'accent-light': '#4FD1C5',
-        'accent-primary': '#38B2AC',
-        'accent-dark': '#2C7A7B',
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        // Text Colors
+        'text': {
+          primary: 'hsl(var(--text-primary))',
+          secondary: 'hsl(var(--text-secondary))',
+          body: 'hsl(var(--text-body))',
+          subtle: 'hsl(var(--text-subtle))',
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        // Accent Colors
+        'accent': {
+          'light-1': 'hsl(var(--accent-light-1))',
+          'light-2': 'hsl(var(--accent-light-2))',
+          'primary-1': 'hsl(var(--accent-primary-1))',
+          'primary-2': 'hsl(var(--accent-primary-2))',
+          'dark-1': 'hsl(var(--accent-dark-1))',
+          'dark-2': 'hsl(var(--accent-dark-2))',
         },
+        // Background Colors
+        'bg': {
+          base: 'hsl(var(--background))',
+          gradient: {
+            from: 'hsl(var(--background-gradient-from))',
+            to: 'hsl(var(--background-gradient-to))',
+          },
+        },
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+      },
+      backdropBlur: {
+        glass: 'var(--glass-blur)',
+      },
+      boxShadow: {
+        glow: 'var(--shadow-glow)',
+        elevation: 'var(--shadow-elevation)',
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
       },
     },
   },

@@ -1038,3 +1038,79 @@ html.has-scroll-smooth {
   margin-top: -100vh;
   padding-top: 100vh;
 }
+
+/* App Container */
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Content Scroller */
+.content-scroller {
+  position: relative;
+  min-height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Main Content */
+.app-main {
+  position: relative;
+  z-index: var(--z-content);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Performance Optimizations */
+.hardware-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Smooth Scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  .content-wrapper {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Prevent iOS rubber-banding */
+.content-wrapper {
+  overscroll-behavior-y: none;
+}
+
+/* Hide scrollbar for cleaner look */
+.content-wrapper::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Ensure proper stacking context */
+.app-container {
+  isolation: isolate;
+}
+
+/* Optimize paint operations */
+* {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

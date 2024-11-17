@@ -3,23 +3,61 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-tertiary: #666666;
-  --text-body: #e0e0e0;
-  --text-subtle: #4a4a4a;
-  --accent-light: #4FD1C5;
-  --accent-primary: #38B2AC;
-  --accent-dark: #2C7A7B;
+  --bg-primary: #111111;
+  --bg-secondary: #1A1A1A;
+  --text-primary: #F4F4F5;
+  --text-secondary: #D4D4D8;
+  --accent-primary: #59C1C8;
+  --accent-secondary: #3FB8A5;
 }
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-bg-primary text-text-body;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-bg-primary text-text-primary font-sans;
+    perspective: 1000px;
+  }
+}
+
+@layer components {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .floating-card {
+    @apply relative bg-bg-secondary/80 backdrop-blur rounded-xl p-6 shadow-lg;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .floating-card-side {
+    @apply absolute inset-0 bg-bg-secondary/40 backdrop-blur;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .floating-card-front {
+    transform: translateZ(20px);
+  }
+
+  .floating-card-back {
+    transform: translateZ(-20px) rotateY(180deg);
+  }
+
+  .skills-section {
+    @apply relative min-h-screen w-full overflow-hidden;
+  }
+
+  .skills-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

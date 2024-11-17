@@ -1,113 +1,153 @@
 import React from 'react';
-import { motion, MotionValue, AnimationControls } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { cardVariants } from './animations';
 import './Skills.css';
 
-interface Skill {
-  title: string;
-  description: string;
-  details: string[];
-  icon: string;
-}
-
 interface FloatingCardProps {
-  skill: Skill;
+  skill: {
+    title: string;
+    subtitle: string;
+    icon: string;
+  };
   index: number;
-  scrollProgress: MotionValue<number>;
-  totalCards: number;
-  isFloating: boolean;
-  animate: AnimationControls;
+  isGrid: boolean;
+  custom: {
+    floating: {
+      x: number;
+      y: number;
+      rotation: number;
+    };
+    grid: {
+      x: number;
+      y: number;
+      rotation: number;
+    };
+  };
 }
 
-const FloatingCard: React.FC<FloatingCardProps> = ({
-  skill,
-  index,
-  scrollProgress,
-  totalCards,
-  isFloating,
-  animate
-}) => {
-  // Calculate grid position
-  const cols = Math.ceil(Math.sqrt(totalCards));
-  const gridX = (index % cols) - (cols - 1) / 2;
-  const gridY = Math.floor(index / cols) - (Math.floor(totalCards / cols) - 1) / 2;
+const FloatingCard: React.FC<FloatingCardProps> = ({ skill, index, isGrid, custom }) => {
+  // Mouse parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  // Initial random position with wider spread
-  const initialX = (Math.random() - 0.5) * 1500; // Increased spread
-  const initialY = (Math.random() - 0.7) * 1200; // Increased vertical spread
-  const initialZ = -2500 - Math.random() * 1500; // Deeper Z range
+  // Spring animations for smooth mouse movement
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), {
+    stiffness: 150,
+    damping: 15
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), {
+    stiffness: 150,
+    damping: 15
+  });
 
-  // Random speeds for more varied movement
-  const speedMultiplier = 0.5 + Math.random() * 0.8;
-  const rotationSpeed = 5 + Math.random() * 10;
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const centerX = (event.clientX - rect.left) / rect.width - 0.5;
+    const centerY = (event.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(centerX);
+    mouseY.set(centerY);
+  };
 
-  // Animation variants
-  const variants = {
-    floating: {
-      x: [initialX, initialX + 100 * (Math.random() - 0.5)],
-      y: [initialY, initialY + 100 * (Math.random() - 0.5)],
-      z: [initialZ, initialZ + 200 * (Math.random() - 0.5)],
-      rotateX: [Math.random() * 30 - 15, Math.random() * 30 - 15],
-      rotateY: [Math.random() * 30 - 15, Math.random() * 30 - 15],
-      rotateZ: [Math.random() * 20 - 10, Math.random() * 20 - 10],
-      transition: {
-        duration: (15 + Math.random() * 10) / speedMultiplier,
-        repeat: Infinity,
-        repeatType: "reverse" as const,
-        ease: "easeInOut",
-        times: [0, 1],
-        loop: Infinity,
-        delay: Math.random() * 2
-      }
-    },
-    static: {
-      x: gridX * 250,
-      y: gridY * 300,
-      z: 0,
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0,
-      transition: {
-        duration: 1.2,
-        ease: [0.6, 0.01, -0.05, 0.9],
-        delay: index * 0.1
-      }
-    }
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
   };
 
   return (
     <motion.div
-      className="floating-card"
+      custom={custom}
+      variants={cardVariants}
+      initial="initial"
+      animate={isGrid ? "grid" : "floating"}
+      whileHover="hover"
+      whileTap="tap"
+      className="group relative"
       style={{
         position: 'absolute',
-        left: '50%',
-        top: '50%',
-        width: '200px',
-        transformStyle: 'preserve-3d',
-        transformOrigin: 'center center',
-        willChange: 'transform',
-        filter: `blur(${isFloating ? 1 : 0}px)`,
-        transition: 'filter 0.5s ease'
+        width: '280px',
+        height: '320px',
+        transformStyle: "preserve-3d",
+        perspective: "1000px",
+        rotateX: !isGrid ? rotateX : 0,
+        rotateY: !isGrid ? rotateY : 0,
       }}
-      initial="floating"
-      animate={animate}
-      variants={variants}
-      whileHover={!isFloating ? { 
-        scale: 1.05,
-        z: 50,
-        transition: { duration: 0.3 }
-      } : {}}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      <motion.div
-        className="card-content"
-        style={{
-          opacity: scrollProgress.get() > 0.1 ? 1 : 0.6,
-          scale: scrollProgress.get() > 0.1 ? 1 : 0.8,
-        }}
+      {/* Ambient light effect */}
+      <div 
+        className="absolute -inset-[100px] bg-accent-primary/20 opacity-0 
+                   group-hover:opacity-20 blur-3xl transition-opacity duration-500"
+        style={{ transform: 'translateZ(-50px)' }}
+      />
+
+      {/* Glass background with blur effect */}
+      <div 
+        className="absolute inset-0 rounded-2xl bg-white/[0.03] backdrop-blur-[2px] 
+                   group-hover:bg-white/[0.06] transition-colors duration-300
+                   border border-white/[0.05] group-hover:border-white/[0.08]"
+        style={{ transform: 'translateZ(-10px)' }}
+      />
+      
+      {/* Card content */}
+      <div 
+        className="relative h-full p-6 rounded-2xl overflow-hidden
+                   flex flex-col items-center justify-center gap-4
+                   text-center transform-gpu preserve-3d"
+        style={{ transform: 'translateZ(10px)' }}
       >
-        <div className="skill-icon">{skill.icon}</div>
-        <h3>{skill.title}</h3>
-        <p>{skill.description}</p>
-      </motion.div>
+        {/* Icon */}
+        <motion.div 
+          className="text-4xl mb-2"
+          animate={{ 
+            y: [0, -8, 0],
+            rotate: [0, -5, 5, 0] 
+          }}
+          transition={{ 
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+            delay: index * 0.2
+          }}
+        >
+          {skill.icon}
+        </motion.div>
+
+        {/* Title */}
+        <h3 className="text-xl font-semibold text-text-primary">
+          {skill.title}
+        </h3>
+
+        {/* Subtitle */}
+        <p className="text-sm text-text-secondary/80">
+          {skill.subtitle}
+        </p>
+
+        {/* Learn More Button */}
+        <motion.button
+          className="mt-4 px-4 py-2 rounded-lg bg-accent-primary/10 
+                     text-accent-primary text-sm font-medium
+                     hover:bg-accent-primary/20 transition-colors
+                     border border-accent-primary/20 hover:border-accent-primary/30"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Learn More
+        </motion.button>
+      </div>
+
+      {/* Edge highlights */}
+      <div 
+        className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r 
+                   from-transparent via-text-primary/10 to-transparent
+                   group-hover:via-accent-primary/20 transition-colors duration-300"
+      />
+      <div 
+        className="absolute inset-y-0 -right-px w-px bg-gradient-to-b 
+                   from-transparent via-text-primary/10 to-transparent
+                   group-hover:via-accent-primary/20 transition-colors duration-300"
+      />
     </motion.div>
   );
 };

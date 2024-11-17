@@ -1,105 +1,77 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import FloatingCardField from './FloatingCardField';
-import './Skills.css';
+import React, { useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const skillsData = [
-  {
-    title: 'iOS Development',
-    description: 'Native Apps & Custom Frameworks',
-    details: ['Swift', 'SwiftUI', 'UIKit', 'Core Data'],
-    icon: '📱'
-  },
-  {
-    title: 'AI & ML',
-    description: 'Machine Learning & AI Solutions',
-    details: ['TensorFlow', 'PyTorch', 'Core ML'],
-    icon: '🤖'
-  },
-  {
-    title: 'System Architecture',
-    description: 'Scalable System Design',
-    details: ['Cloud Architecture', 'Microservices'],
-    icon: '🏗️'
-  },
-  {
-    title: 'Web Development',
-    description: 'Modern Web Applications',
-    details: ['React', 'Next.js', 'TypeScript'],
-    icon: '💻'
-  },
-  {
-    title: 'Backend Development',
-    description: 'Robust Server Solutions',
-    details: ['Node.js', 'Python', 'Go'],
-    icon: '⚙️'
-  },
-  {
-    title: 'DevOps',
-    description: 'CI/CD & Infrastructure',
-    details: ['Docker', 'Kubernetes', 'AWS'],
-    icon: '🚀'
-  }
-];
+gsap.registerPlugin(ScrollTrigger);
 
-const Skills = () => {
-  const [showGrid, setShowGrid] = useState(false);
+const Skills: React.FC = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!contentRef.current || !titleRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Animate title
+      gsap.from(titleRef.current, {
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top center+=100",
+          end: "bottom center",
+          toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      // Animate content
+      gsap.from(contentRef.current, {
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top center+=50",
+          end: "bottom center",
+          toggleActions: "play none none reverse"
+        },
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+        ease: "power2.out"
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <motion.section 
-      id="skills"
-      className="skills-section"
-      style={{
-        position: 'relative',
-        height: '100vh',
-        overflow: 'hidden'
-      }}
-    >
-      <div className="skills-content" style={{ position: 'relative', height: '100%' }}>
-        <FloatingCardField 
-          skills={skillsData}
-          onTransitionComplete={() => {
-            console.log('Transition complete called');
-            setShowGrid(true);
-          }}
-        />
-
-        <AnimatePresence mode="sync">
-          {showGrid && (
-            <motion.div 
-              key="grid"
-              className="skills-grid-section"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                zIndex: 1
-              }}
-            >
-              <motion.div
-                className="skills-header"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <h2>Skills & Expertise</h2>
-                <p>Specialized in creating innovative solutions across multiple domains</p>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Title Section */}
+      <div 
+        ref={titleRef}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          Skills & Expertise
+        </h2>
+        <p className="text-lg text-white/70 max-w-2xl mx-auto">
+          A curated collection of technologies and tools I've mastered throughout my journey
+        </p>
       </div>
-    </motion.section>
+
+      {/* Content Section */}
+      <div 
+        ref={contentRef}
+        className="text-center max-w-3xl mx-auto"
+      >
+        <p className="text-white/80 leading-relaxed">
+          Each skill card represents a core competency, backed by years of hands-on experience 
+          and continuous learning. From mobile development to cloud architecture, these 
+          technologies form the foundation of my professional toolkit.
+        </p>
+      </div>
+    </div>
   );
 };
 

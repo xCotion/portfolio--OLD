@@ -8,19 +8,17 @@
 .skills-section {
   position: relative;
   width: 100%;
-  min-height: 400vh;
+  min-height: 100vh;
   overflow: visible;
 }
 
 .floating-cards-wrapper {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: -100vh;
   left: 0;
   width: 100%;
-  height: 100vh;
-  z-index: 0;
-  perspective: 2000px;
-  transform-style: preserve-3d;
+  height: 200vh;
+  pointer-events: none;
 }
 
 .skills-container {
@@ -169,49 +167,136 @@
 
 .floating-card {
   position: absolute;
-  width: 250px;
-  height: 300px;
+  width: 280px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   transform-style: preserve-3d;
-  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .card-content {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform-style: preserve-3d;
+}
+
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  transform-style: preserve-3d;
+  align-items: center;
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border-radius: 20px;
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.card-icon {
+.card-side {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-side.top,
+.card-side.bottom {
+  width: 100%;
+  height: 10px;
+  left: 0;
+}
+
+.card-side.left,
+.card-side.right {
+  width: 10px;
+  height: 100%;
+  top: 0;
+}
+
+.card-side.back {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.skill-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
-  transform: translateZ(20px);
+  color: #64ffda;
 }
 
-.card-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  transform: translateZ(15px);
-}
-
-.card-content p {
-  margin: 0 0 1rem 0;
+.card-front h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
   text-align: center;
-  font-size: 0.9rem;
+}
+
+.card-front p {
+  font-size: 0.875rem;
   opacity: 0.8;
-  transform: translateZ(10px);
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.learn-more-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(100, 255, 218, 0.1);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 4px;
+  color: #64ffda;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.learn-more-btn:hover {
+  background: rgba(100, 255, 218, 0.2);
+  border-color: #64ffda;
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.carousel-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 .scroll-container {
@@ -223,9 +308,28 @@
 
 .skills-grid-section {
   position: relative;
-  z-index: 3;
-  padding: 4rem 2rem;
-  margin-top: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.skills-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.skills-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.skills-header p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Ensure smooth scrolling */
