@@ -1,12 +1,35 @@
 /* Hero Section */
-.hero-section {
+.section-hero {
+  position: relative;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  position: relative;
   overflow: hidden;
+}
+
+.section-hero .glass-card {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .particle-background {
@@ -17,35 +40,6 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-}
-
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-  padding: 4rem;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.heading-primary {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  background: linear-gradient(to right, var(--text-primary), var(--accent-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.2;
-}
-
-.heading-secondary {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.05em;
 }
 
 .hero-tagline {
@@ -59,9 +53,8 @@
 .hero-cta-container {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .cta-button {
@@ -97,7 +90,8 @@
 .social-links {
   display: flex;
   gap: 1.5rem;
-  margin-top: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .social-icon {
@@ -159,15 +153,82 @@
   }
 }
 
-.app-container {
-  padding-top: 80px;
-  padding-bottom: 80px;
+.app-wrapper {
   min-height: 100vh;
-  color: var(--text-primary);
-  overflow-x: hidden;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+  opacity: 1 !important;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Base transitions for all interactive elements */
+* {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations */
+section > * {
+  opacity: 1 !important;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Ambient lighting effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.7),
+    0 0 15px rgba(100, 116, 139, 0.5);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: none;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(100, 116, 139, 0.6);
+}
+
+/* Ensure smooth animations for background elements */
+.bg-element {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Remove forced visibility once animations are working */
+.app-wrapper *,
+.app-container *,
+section * {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Skills Section */
@@ -341,44 +402,62 @@
 
 /* Typography */
 .heading-primary {
-  color: var(--text-primary);
-  font-size: 3.5rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(to right, var(--text-primary), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
 }
 
 .heading-secondary {
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--text-secondary);
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.05em;
 }
 
-.body-text {
-  color: var(--text-body);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
+/* CTA Container */
+.hero-cta-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-.text-center {
-  text-align: center;
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-/* Animations */
-@keyframes glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 15px var(--accent-glow));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px var(--accent-glow));
-  }
+.hero-background {
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    var(--bg-primary) 80%,
+    var(--bg-primary) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-skills,
+.section-brands,
+.section-achievements,
+.section-contact {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: var(--bg-primary);
 }
 
 /* Responsive Design */
@@ -547,4 +626,84 @@
   .logo {
     font-size: 1.25rem;
   }
+}
+
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+[data-scroll-container] {
+  perspective: 1px;
+  transform-style: preserve-3d;
+}
+
+section {
+  position: relative;
+  padding: 100px 0;
+  opacity: 0;
+  transform: translateY(50px);
+  will-change: transform, opacity;
+}
+
+/* Smooth scrollbar styles */
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+  width: 7px;
+  border-radius: 10px;
+  margin: 2px;
+  cursor: grab;
+}
+
+.has-scroll-scrolling .c-scrollbar_thumb {
+  cursor: grabbing;
+}
+
+.has-scroll-dragging {
+  user-select: none;
+}
+
+/* Ensure other sections maintain proper spacing */
+.section-skills,
+.section-brands,
+.section-achievements,
+.section-contact {
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+/* Background gradient for smooth transition */
+.hero-background {
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    var(--bg-primary) 80%,
+    var(--bg-primary) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
