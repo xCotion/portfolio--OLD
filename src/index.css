@@ -8,20 +8,28 @@
   --text-body: #A1A1AA;     
   --text-subtle: #71717A;   
   
-  /* Glass Effects - Darker and more subtle */
+  /* Glass Effects */
   --glass-subtle: rgba(255, 255, 255, 0.02);
   --glass-light: rgba(255, 255, 255, 0.03);
   --glass-medium: rgba(255, 255, 255, 0.04);
   --glass-strong: rgba(255, 255, 255, 0.05);
   
-  /* Accent Colors - More muted */
-  --accent-light: #94A3B8;   
-  --accent-primary: #64748B; 
-  --accent-dark: #475569;    
-  --accent-glow: rgba(148, 163, 184, 0.08);
-
+  /* Professional Teal Accent Colors */
+  --accent-light: #4FD1C5;  /* Bright Teal (Pantone 3252) */
+  --accent-primary: #2C7A7B;  /* Professional Teal (Pantone 3282) */
+  --accent-dark: #285E61;  /* Deep Teal (Pantone 3302) */
+  --accent-glow: rgba(79, 209, 197, 0.15);
+  
+  /* RGB values for animations */
+  --accent-rgb: 79, 209, 197;  /* Bright Teal */
+  --accent-primary-rgb: 44, 122, 123;  /* Professional Teal */
+  --accent-dark-rgb: 40, 94, 97;  /* Deep Teal */
+  
+  /* Animation Control */
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
   /* Font */
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -40,6 +48,7 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg-primary);
 }
 
 body {
@@ -49,6 +58,8 @@ body {
   max-height: 100vh;
   background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   color: var(--text-primary);
+  opacity: 1;
+  transition: opacity 0.3s ease;
   overflow: hidden;
   overflow-x: hidden;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -83,4 +94,11 @@ body {
 #root::-webkit-scrollbar-thumb {
   background: var(--glass-strong);
   border-radius: 4px;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+.js-loading *,
+.js-loading *:before,
+.js-loading *:after {
+  animation-play-state: paused !important;
 }
