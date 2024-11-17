@@ -5,7 +5,7 @@ import './Brands.css';
 const kpsLogo = new URL('../../assets/KPSLOGO.PNG', import.meta.url).href;
 const donsLogo = new URL('../../assets/dons.png', import.meta.url).href;
 
-export const Brands = () => {
+const Brands = () => {
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null);
 
   const getGlowStyle = (brand: string) => {
@@ -53,8 +53,6 @@ export const Brands = () => {
                 <motion.div
                   key={brand.name}
                   className="brand-item"
-                  onMouseEnter={() => setHoveredBrand(brand.name)}
-                  onMouseLeave={() => setHoveredBrand(null)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -62,6 +60,8 @@ export const Brands = () => {
                     duration: 0.5,
                     ease: "easeOut"
                   }}
+                  onMouseEnter={() => setHoveredBrand(brand.name)}
+                  onMouseLeave={() => setHoveredBrand(null)}
                 >
                   <motion.div
                     className="brand-logo-container"
@@ -95,3 +95,5 @@ export const Brands = () => {
     </section>
   );
 };
+
+export default Brands;

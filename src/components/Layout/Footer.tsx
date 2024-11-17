@@ -1,25 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import './Footer.css';
 
 export const Footer = () => {
   return (
     <motion.footer
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="glass-footer"
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10
-      }}
+      className="footer"
     >
       <div className="footer-content">
         <div className="footer-section">
           <motion.p 
             className="footer-text"
-            whileHover={{ color: 'var(--accent-light)' }}
+            whileHover={{ 
+              color: 'var(--accent-light)',
+              transition: { duration: 0.2 }
+            }}
           >
             2024 ashton.services
           </motion.p>
@@ -29,7 +26,7 @@ export const Footer = () => {
             href="/privacy"
             whileHover={{ 
               color: 'var(--accent-light)',
-              textShadow: '0 0 8px var(--accent-glow)'
+              transition: { duration: 0.2 }
             }}
           >
             Privacy Policy
@@ -38,7 +35,7 @@ export const Footer = () => {
             href="/terms"
             whileHover={{ 
               color: 'var(--accent-light)',
-              textShadow: '0 0 8px var(--accent-glow)'
+              transition: { duration: 0.2 }
             }}
           >
             Terms of Service
@@ -47,4 +44,4 @@ export const Footer = () => {
       </div>
     </motion.footer>
   );
-}; 
+};

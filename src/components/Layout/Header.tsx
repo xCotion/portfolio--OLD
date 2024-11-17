@@ -1,77 +1,108 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import './Header.css';
 
-export const Header = () => {
-  const [activeSection, setActiveSection] = useState('');
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const sections = ['services', 'projects', 'about', 'contact'];
-    
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      const scrollPosition = window.scrollY;
+      // Account for the -240px margin in the Hero component
+      const adjustedPosition = scrollPosition + 240;
+      setIsScrolled(adjustedPosition > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Contact', path: '/contact' }
+  ];
 
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-header"
-    >
-      <nav className="header-nav">
-        <motion.div 
-          className="logo"
-          whileHover={{ 
-            scale: 1.05,
-            textShadow: '0 0 15px var(--accent-glow)'
-          }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{ cursor: 'pointer' }}
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="header-content">
+        <Link to="/" className="logo">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            ashton.services
+          </motion.span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="desktop-nav">
+          {navItems.map((item, index) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className="nav-link"
+            >
+              <motion.span
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                {item.name}
+              </motion.span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className={`mobile-menu-button ${isMobileMenuOpen ? 'active' : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
         >
-          ashton.services
-        </motion.div>
-        <div className="nav-links">
-          {['Services', 'Projects', 'About', 'Contact'].map((item, index) => (
-            <motion.a
-              key={item}
-              onClick={() => scrollToSection(item.toLowerCase())}
-              className={activeSection === item.toLowerCase() ? 'active' : ''}
-              whileHover={{ 
-                scale: 1.05,
-                color: 'var(--accent-light)',
-                textShadow: '0 0 8px var(--accent-glow)'
-              }}
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav
+              className="mobile-nav"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              style={{ cursor: 'pointer' }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              {item}
-            </motion.a>
-          ))}
-        </div>
-      </nav>
-    </motion.header>
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="mobile-nav-link"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <motion.span
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    {item.name}
+                  </motion.span>
+                </Link>
+              ))}
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </div>
+    </header>
   );
 };
+
+export default Header;

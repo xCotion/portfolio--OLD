@@ -1,104 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  /* Colors */
-  --bg-primary: #000000;    /* Darker background */
-  --bg-secondary: #0A0A0A;  /* Slightly lighter black */
-  --text-primary: #F4F4F5;  
-  --text-secondary: #E4E4E7;
-  --text-tertiary: #D4D4D8; 
-  --text-body: #A1A1AA;     
-  --text-subtle: #71717A;   
-  
-  /* Glass Effects */
-  --glass-subtle: rgba(255, 255, 255, 0.02);
-  --glass-light: rgba(255, 255, 255, 0.03);
-  --glass-medium: rgba(255, 255, 255, 0.04);
-  --glass-strong: rgba(255, 255, 255, 0.05);
-  
-  /* Professional Teal Accent Colors */
-  --accent-light: #4FD1C5;  /* Bright Teal (Pantone 3252) */
-  --accent-primary: #2C7A7B;  /* Professional Teal (Pantone 3282) */
-  --accent-dark: #285E61;  /* Deep Teal (Pantone 3302) */
-  --accent-glow: rgba(79, 209, 197, 0.15);
-  
-  /* RGB values for animations */
-  --accent-rgb: 79, 209, 197;  /* Bright Teal */
-  --accent-primary-rgb: 44, 122, 123;  /* Professional Teal */
-  --accent-dark-rgb: 40, 94, 97;  /* Deep Teal */
-  
-  /* Animation Control */
-  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Font */
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #666666;
+  --text-body: #e0e0e0;
+  --text-subtle: #4a4a4a;
+  --accent-light: #4FD1C5;
+  --accent-primary: #38B2AC;
+  --accent-dark: #2C7A7B;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  background: var(--bg-primary);
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  max-height: 100vh;
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-  color: var(--text-primary);
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  overflow: hidden;
-  overflow-x: hidden;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-@supports (-webkit-overflow-scrolling: touch) {
+@layer base {
   body {
-    -webkit-overflow-scrolling: touch;
+    @apply bg-bg-primary text-text-body;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-#root {
-  height: 100vh;
-  overflow-y: auto;
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-}
-
-/* Optional: If you want custom scrollbar styling */
-#root::-webkit-scrollbar {
-  width: 8px;
-}
-
-#root::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-#root::-webkit-scrollbar-thumb {
-  background: var(--glass-strong);
-  border-radius: 4px;
-}
-
-/* Prevent FOUC (Flash of Unstyled Content) */
-.js-loading *,
-.js-loading *:before,
-.js-loading *:after {
-  animation-play-state: paused !important;
 }
