@@ -8,14 +8,14 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: -240px;
-  padding-top: 60px;
   z-index: var(--z-content);
+  margin-top: -60px;
+  padding-top: 60px;
 }
 
 /* Background Elements */
 .hero-background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -115,14 +115,12 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 4rem 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
-  min-height: 100vh;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  align-items: flex-start;
+  height: 100%;
 }
 
 /* Main Content */

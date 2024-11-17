@@ -272,44 +272,98 @@
   border: 0;
 }
 
-@media (max-width: 768px) {
-  .hero-content {
-    padding: 2rem;
-  }
-
-  .hero-cta-container {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .cta-button {
-    width: 100%;
-  }
-}
-
-.app-wrapper {
+.app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg-primary);
 }
 
-.app-container {
+.app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-section {
-  min-height: 100vh;
-  width: 100%;
+.page-content {
+  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
+  flex-direction: column;
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
+}
+
+section {
   position: relative;
-  opacity: 1 !important;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
+  padding: 100px 0;
+  opacity: 1;
+  transform: none;
+}
+
+/* Container max-width */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Base styles */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  section {
+    padding: 2rem 1rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ensure content is scrollable */
+html, body {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reset any overflow hidden that might be blocking scroll */
+#root {
+  min-height: 100%;
+  overflow: visible;
+}
+
+/* Section spacing */
+section {
+  width: 100%;
+  position: relative;
+  overflow: visible;
 }
 
 /* Base transitions for all interactive elements */
@@ -718,14 +772,6 @@ html.has-scroll-smooth {
   transform-style: preserve-3d;
 }
 
-section {
-  position: relative;
-  padding: 100px 0;
-  opacity: 0;
-  transform: translateY(50px);
-  will-change: transform, opacity;
-}
-
 /* Smooth scrollbar styles */
 .c-scrollbar {
   position: absolute;
@@ -960,4 +1006,35 @@ section {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Home page specific styles */
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 2rem 0;
+}
+
+.home-container > * {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Ensure content is scrollable */
+.home-container {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent content shift during loading */
+.home-container > *:not(:first-child) {
+  margin-top: -100vh;
+  padding-top: 100vh;
 }
